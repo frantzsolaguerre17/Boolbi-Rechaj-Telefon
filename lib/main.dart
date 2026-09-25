@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'LSB POS',
+      title: 'BOULBI POS',
       theme: ThemeData(
         primaryColor: Colors.green,
         scaffoldBackgroundColor: Colors.white,
