@@ -16,7 +16,7 @@ elevation: 0,
 backgroundColor: const Color(0xFF146B3A),
 foregroundColor: Colors.white,
 title: const Text(
-"BOULBI KONPLEKS",
+"BOULBI KONPLÈKS",
 style: TextStyle(
 fontWeight: FontWeight.bold,
 fontSize: 20,
@@ -94,7 +94,7 @@ fontSize: 14,
 ),
 SizedBox(height: 5),
 Text(
-"BOULBI KONPLEKS",
+"BOULBI KONPLÈKS",
 style: TextStyle(
 color: Colors.white,
 fontSize: 22,
@@ -103,7 +103,7 @@ fontWeight: FontWeight.bold,
 ),
 SizedBox(height: 4),
 Text(
-"Rechaj telefon",
+"Rechaj aparèy elektronik",
 style: TextStyle(
 color: Colors.white70,
 fontSize: 13,
@@ -134,7 +134,7 @@ color: Color(0xFF202124),
 const SizedBox(height: 6),
 
 const Text(
-"Kisa ou swete fe ?",
+"Kisa ou swete fè ?",
 style: TextStyle(
 fontSize: 14,
 color: Colors.grey,
@@ -164,7 +164,7 @@ const SizedBox(height: 17),
 
 _menuCard(
 context: context,
-title: "Telefon kap chaje",
+title: "Aparèy kap chaje",
 subtitle: "Konsilte ansyen rechaj yo",
 icon: Icons.ad_units,
 color: const Color(0xFF198754),
@@ -175,7 +175,7 @@ const SizedBox(height: 17),
 
   _menuCard(
     context: context,
-    title: "Telefon ki remet",
+    title: "Aparèy ki remèt",
     subtitle: "Konsilte ansyen rechaj yo",
     icon: Icons.access_alarm,
     color: const Color(0xFF198754),
@@ -189,7 +189,7 @@ const SizedBox(height: 17),
 
 Center(
 child: Text(
-"BOULBI KONPLEKS • Rechaj telefon",
+"BOULBI KONPLÈKS • Rechaj Aparèy Elektronik",
 style: TextStyle(
 color: Colors.grey.shade500,
 fontSize: 12,

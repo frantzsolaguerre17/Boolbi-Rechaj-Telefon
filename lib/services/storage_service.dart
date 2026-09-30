@@ -40,7 +40,7 @@ class StorageService {
       if (ticket["kod"]?.toString() == code) {
         ticket["statut"] = status;
 
-        if (status == "REMET") {
+        if (status == "REMÈT") {
           ticket["dat_remet"] = DateTime.now().toIso8601String();
         }
 
@@ -53,5 +53,42 @@ class StorageService {
         .toList();
 
     await prefs.setStringList(key, updatedList);
+  }
+
+  static Future<void> deleteOldRemis() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    final list = prefs.getStringList(key) ?? [];
+
+    final now = DateTime.now();
+
+    final tickets = list
+        .map((e) => jsonDecode(e))
+        .cast<Map<String, dynamic>>()
+        .where((ticket) {
+      if (ticket["statut"]?.toString() != "REMÈT") {
+        return true;
+      }
+
+      final value = ticket["dat_remet"];
+
+      if (value == null) {
+        return true;
+      }
+
+      final dateRemet = DateTime.tryParse(value.toString());
+
+      if (dateRemet == null) {
+        return true;
+      }
+
+      final difference = now.difference(dateRemet);
+
+      return difference.inDays < 3;
+    })
+        .map((ticket) => jsonEncode(ticket))
+        .toList();
+
+    await prefs.setStringList(key, tickets);
   }
 }

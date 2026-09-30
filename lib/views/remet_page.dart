@@ -24,12 +24,14 @@ setState(() {
 isLoading = true;
 });
 
+await StorageService.deleteOldRemis();
+
 final data = await StorageService.getTickets();
 
 if (!mounted) return;
 
 final remis = data.where((ticket) {
-return ticket["statut"]?.toString() == "REMET";
+return ticket["statut"]?.toString() == "REMÈT";
 }).toList();
 
 setState(() {
@@ -60,7 +62,7 @@ return "Date inconnue";
 const jours = [
 "Lendi",
 "Madi",
-"Mekredi",
+"Mèkredi",
 "Jedi",
 "Vandredi",
 "Samdi",
@@ -74,7 +76,7 @@ const mois = [
 "Avril",
 "Me",
 "Jen",
-"Jiye",
+"Jiyè",
 "Out",
 "Septanb",
 "Okyob",
@@ -108,7 +110,7 @@ elevation: 0,
 backgroundColor: const Color(0xFF146B3A),
 foregroundColor: Colors.white,
 title: const Text(
-"Telefon ki Remèt",
+"Aparèy ki Remèt",
 style: TextStyle(
 fontWeight: FontWeight.bold,
 ),
@@ -141,7 +143,7 @@ color: Colors.grey.shade400,
 const SizedBox(height: 18),
 const Center(
 child: Text(
-"Pa gen fich REMET",
+"Pa gen fich REMÈT",
 style: TextStyle(
 fontSize: 18,
 fontWeight: FontWeight.bold,
@@ -152,7 +154,7 @@ color: Color(0xFF202124),
 const SizedBox(height: 8),
 Center(
 child: Text(
-"Fich yo ap parèt isit la lè yo REMET.",
+"Fich yo ap parèt isit la lè yo REMÈT.",
 style: TextStyle(
 fontSize: 13,
 color: Colors.grey.shade600,
@@ -176,9 +178,9 @@ Widget _ticketCard(Map<String, dynamic> ticket) {
 final name = ticket["non"]?.toString() ?? "Client";
 final price = ticket["pri"]?.toString() ?? "0";
 final code = ticket["kod"]?.toString() ?? "---";
-final marque = ticket["mak"]?.toString() ?? "N/A";
-final appareil = ticket["app"]?.toString() ?? "N/A";
-final etat = ticket["eta"]?.toString() ?? "N/A";
+final marque = ticket["mak"]?.toString() ?? "";
+final appareil = ticket["app"]?.toString() ?? "";
+final etat = ticket["eta"]?.toString() ?? "";
 
 final dateCreation = formatDateTime(ticket["dat"]);
 final dateRemet = formatDateTime(ticket["dat_remet"]);
@@ -253,7 +255,7 @@ color: const Color(0xFF198754).withOpacity(0.10),
 borderRadius: BorderRadius.circular(10),
 ),
 child: const Text(
-"REMET",
+"REMÈT",
 style: TextStyle(
 color: Color(0xFF198754),
 fontSize: 12,
@@ -299,7 +301,7 @@ value: dateCreation,
 const SizedBox(height: 12),
 _dateItem(
 icon: Icons.assignment_turned_in_outlined,
-title: "Dat REMET",
+title: "Dat REMÈT",
 value: dateRemet,
 ),
 const SizedBox(height: 14),

@@ -15,7 +15,7 @@ final nomController = TextEditingController();
 final prixController = TextEditingController();
 final deskripsyonController = TextEditingController();
 
-String appareil = "Telefon";
+String appareil = "Telefòn";
 String marque = "Samsung";
 String etat = "Bon";
 
@@ -23,11 +23,11 @@ bool isPhoneSelected = true;
 bool isPrinting = false;
 
 final appareils = [
-"Telefon",
-"Limye",
+"Telefòn",
+"Limyè",
 "Radyo",
 "Laptop",
-"Bakop",
+"Bakòp",
 "Tablet",
 "Printer POS",
 ];
@@ -49,10 +49,10 @@ final marques = [
 ];
 
 final etats = [
-"Nef",
+"Nèf",
 "Bon",
 "Pa mal",
-"Move",
+"Movè",
 ];
 
 String generateCode() {
@@ -64,7 +64,7 @@ if (value == null) return;
 
 setState(() {
 appareil = value;
-isPhoneSelected = appareil == "Telefon";
+isPhoneSelected = appareil == "Telefòn";
 
 if (!isPhoneSelected) {
 marque = "";
@@ -94,7 +94,7 @@ final String code = generateCode();
 
 final data = {
 "non": nomController.text.trim(),
-"mak": isPhoneSelected ? marque : "N/A",
+"mak": isPhoneSelected ? marque : "",
 "app": appareil,
 "eta": etat,
 "deskripsyon": deskripsyonController.text.trim(),
@@ -112,7 +112,7 @@ await PrinterService.print(data);
 if (!mounted) return;
 
 _showMessage(
-"Tikè $code kreye avèk siksè.",
+"Fich $code kreye avèk siksè.",
 );
 
 nomController.clear();
@@ -120,7 +120,7 @@ prixController.clear();
 deskripsyonController.clear();
 
 setState(() {
-appareil = "Telefon";
+appareil = "Telefòn";
 marque = "Samsung";
 etat = "Bon";
 isPhoneSelected = true;
@@ -129,7 +129,7 @@ isPhoneSelected = true;
 if (!mounted) return;
 
 _showMessage(
-"Erè pandan kreyasyon tikè a.",
+"Erè pandan kreyasyon fich la.",
 );
 } finally {
 if (mounted) {
@@ -403,7 +403,7 @@ const SizedBox(height: 25),
 
   Center(
     child: Text(
-      "BOULBI KONPLEKS • Rechaj telefon",
+      "BOULBI KONPLÈKS • Rechaj Aparèy Elektronik",
       style: TextStyle(
         color: Colors.grey.shade500,
         fontSize: 12,

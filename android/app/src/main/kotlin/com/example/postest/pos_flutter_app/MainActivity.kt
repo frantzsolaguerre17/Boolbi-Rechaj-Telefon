@@ -1,3 +1,4 @@
+
 package com.example.postest.pos_flutter_app
 
 import android.content.ComponentName
@@ -19,6 +20,11 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import android.graphics.BitmapFactory
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.Typeface
 
 class MainActivity : FlutterActivity() {
 
@@ -151,6 +157,9 @@ class MainActivity : FlutterActivity() {
                     val etat =
                         data["eta"]?.toString() ?: ""
 
+                    val deskripsyon =
+                        data["deskripsyon"]?.toString() ?: ""
+
                     val prix =
                         data["pri"]?.toString() ?: ""
 
@@ -166,6 +175,7 @@ class MainActivity : FlutterActivity() {
                         appareil = appareil,
                         marque = marque,
                         etat = etat,
+                        deskripsyon = deskripsyon,
                         prix = prix,
                         code = code
                     )
@@ -184,7 +194,7 @@ class MainActivity : FlutterActivity() {
 
                                 Log.d(
                                     "PRINTER",
-                                    "Deuxième impression après 7 secondes"
+                                    "Deuxième impression après 10 secondes"
                                 )
 
                                 printTicket(
@@ -192,6 +202,7 @@ class MainActivity : FlutterActivity() {
                                     appareil = appareil,
                                     marque = marque,
                                     etat = etat,
+                                    deskripsyon = deskripsyon,
                                     prix = prix,
                                     code = code
                                 )
@@ -360,6 +371,216 @@ class MainActivity : FlutterActivity() {
         }
     }
 
+
+    private fun printLargeCode(code: String) {
+        if (printerService == null) {
+            Log.e("PRINTER", "printerService null dans printLargeCode")
+            return
+        }
+
+        try {
+            val width = 330
+            val height = 95
+
+            val bitmap = Bitmap.createBitmap(
+                width,
+                height,
+                Bitmap.Config.ARGB_8888
+            )
+
+            val canvas = Canvas(bitmap)
+            canvas.drawColor(Color.WHITE)
+
+            val paint = Paint(Paint.ANTI_ALIAS_FLAG)
+            paint.color = Color.BLACK
+            paint.textSize = 55f
+            paint.typeface = Typeface.create(
+                Typeface.DEFAULT,
+                Typeface.BOLD
+            )
+            paint.textAlign = Paint.Align.CENTER
+
+            val centerX = width / 2f
+            val centerY =
+                (height / 2f) - ((paint.ascent() + paint.descent()) / 2f)
+
+            canvas.drawText(
+                code,
+                centerX,
+                centerY,
+                paint
+            )
+
+            printerService?.setPrinterPrintAlignment(
+                1,
+                callback
+            )
+
+            printerService?.printBitmap(
+                1,
+                width,
+                bitmap,
+                callback
+            )
+
+            printerService?.printBlankLines(
+                1,
+                10,
+                callback
+            )
+
+            bitmap.recycle()
+
+        } catch (e: Exception) {
+            Log.e(
+                "PRINTER",
+                "Erreur impression grand code",
+                e
+            )
+        }
+    }
+
+
+
+    private fun printBoolbiKonpleks(boolbi_text: String) {
+        if (printerService == null) {
+            Log.e("PRINTER", "printerService null dans printLargeCode")
+            return
+        }
+
+        try {
+            val width = 300
+            val height = 20
+
+            val bitmap = Bitmap.createBitmap(
+                width,
+                height,
+                Bitmap.Config.ARGB_8888
+            )
+
+            val canvas = Canvas(bitmap)
+            canvas.drawColor(Color.WHITE)
+
+            val paint = Paint(Paint.ANTI_ALIAS_FLAG)
+            paint.color = Color.BLACK
+            paint.textSize = 25f
+            paint.typeface = Typeface.create(
+                Typeface.DEFAULT,
+                Typeface.BOLD
+            )
+            paint.textAlign = Paint.Align.CENTER
+
+            val centerX = width / 2f
+            val centerY =
+                (height / 2f) - ((paint.ascent() + paint.descent()) / 2f)
+
+            canvas.drawText(
+                boolbi_text,
+                centerX,
+                centerY,
+                paint
+            )
+
+            printerService?.setPrinterPrintAlignment(
+                1,
+                callback
+            )
+
+            printerService?.printBitmap(
+                1,
+                width,
+                bitmap,
+                callback
+            )
+
+            printerService?.printBlankLines(
+                1,
+                10,
+                callback
+            )
+
+            bitmap.recycle()
+
+        } catch (e: Exception) {
+            Log.e(
+                "PRINTER",
+                "Erreur impression grand code",
+                e
+            )
+        }
+    }
+
+
+
+    private fun printPrix(prix: String) {
+        if (printerService == null) {
+            Log.e("PRINTER", "printerService null dans printLargeCode")
+            return
+        }
+
+        try {
+            val width = 300
+            val height = 15
+
+            val bitmap = Bitmap.createBitmap(
+                width,
+                height,
+                Bitmap.Config.ARGB_8888
+            )
+
+            val canvas = Canvas(bitmap)
+            canvas.drawColor(Color.WHITE)
+
+            val paint = Paint(Paint.ANTI_ALIAS_FLAG)
+            paint.color = Color.BLACK
+            paint.textSize = 25f
+            paint.typeface = Typeface.create(
+                Typeface.DEFAULT,
+                Typeface.BOLD
+            )
+            paint.textAlign = Paint.Align.CENTER
+
+            val centerX = width / 2f
+            val centerY =
+                (height / 2f) - ((paint.ascent() + paint.descent()) / 2f)
+
+            canvas.drawText(
+                prix,
+                centerX,
+                centerY,
+                paint
+            )
+
+            printerService?.setPrinterPrintAlignment(
+                1,
+                callback
+            )
+
+            printerService?.printBitmap(
+                1,
+                width,
+                bitmap,
+                callback
+            )
+
+            printerService?.printBlankLines(
+                1,
+                10,
+                callback
+            )
+
+            bitmap.recycle()
+
+        } catch (e: Exception) {
+            Log.e(
+                "PRINTER",
+                "Erreur impression grand code",
+                e
+            )
+        }
+    }
+
+
     // =========================================================
     // INFORMATIONS ALIGNÉES À GAUCHE
     // =========================================================
@@ -486,8 +707,9 @@ class MainActivity : FlutterActivity() {
             // -------------------------------------------------
 
             printCentered(
-                "Boolbi Konpleks",
-                80
+                "Boolbi Konplèks",
+                100
+
             )
 
             // -------------------------------------------------
@@ -495,7 +717,7 @@ class MainActivity : FlutterActivity() {
             // -------------------------------------------------
 
             printCentered(
-                "Ri Dormeus, Ryel Lapaix",
+                "Ri Dormeus, Riyèl Lapaix",
                 25
             )
 
@@ -513,7 +735,7 @@ class MainActivity : FlutterActivity() {
             // -------------------------------------------------
 
             printCentered(
-                "Sevis rapid & fyab",
+                "Sèvis rapid & fyab",
                 22
             )
 
@@ -560,6 +782,7 @@ class MainActivity : FlutterActivity() {
         appareil: String,
         marque: String,
         etat: String,
+        deskripsyon: String,
         prix: String,
         code: String
     ) {
@@ -587,10 +810,7 @@ class MainActivity : FlutterActivity() {
             // CODE
             // =================================================
 
-            printCentered(
-                code,
-                60
-            )
+           printLargeCode(code)
 
             // =================================================
             // SÉPARATEUR
@@ -621,7 +841,7 @@ class MainActivity : FlutterActivity() {
 
             printerService?.printBlankLines(
                 1,
-                5,
+                7,
                 callback
             )
 
@@ -630,14 +850,14 @@ class MainActivity : FlutterActivity() {
             // =================================================
 
             printInfo(
-                label = "Aparey :",
-                value = "$appareil / $marque",
+                label = "Aparèy :",
+                value = "$appareil $marque",
                 fontSize = 24
             )
 
             printerService?.printBlankLines(
                 1,
-                5,
+                7,
                 callback
             )
 
@@ -647,15 +867,28 @@ class MainActivity : FlutterActivity() {
 
             printInfo(
                 label = "Eta :",
-                value = etat,
+                value = "$etat, $deskripsyon",
                 fontSize = 24
             )
 
             printerService?.printBlankLines(
                 1,
-                5,
+                7,
                 callback
             )
+            // =================================================
+            // DESCRIPTION
+            // =================================================
+           /* printDescription(
+                deskripsyon = deskripsyon,
+                fontSize = 16
+            )*/
+
+            /*printerService?.printBlankLines(
+                1,
+                7,
+                callback
+            )*/
 
             // =================================================
             // DATE AUTOMATIQUE
@@ -672,7 +905,7 @@ class MainActivity : FlutterActivity() {
 
             printerService?.printBlankLines(
                 1,
-                16,
+                17,
                 callback
             )
 
@@ -693,7 +926,7 @@ class MainActivity : FlutterActivity() {
 
             printCentered(
                 "PRI : $prix HTG",
-                36
+                100
             )
 
             // =================================================
@@ -722,7 +955,7 @@ class MainActivity : FlutterActivity() {
             // =================================================
 
             printCentered(
-                "PA PEDI FICH LA, SE AVEK LI POUW VIN PRAN APAREY OU A !",
+                "PA PÈDI FICH LA, SE AVÈK LI POUW VIN PRAN APARÈY OU A !",
                 28
             )
 
@@ -733,7 +966,7 @@ class MainActivity : FlutterActivity() {
             )
 
             printCentered(
-                "Mesi paske ou chwazi pran sevis nan men non",
+                "Mèsi paske ou chwazi pran sèvis nan men nou",
                 20
             )
 
