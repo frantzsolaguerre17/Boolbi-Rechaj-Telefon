@@ -28,7 +28,7 @@ final appareils = [
 "Radyo",
 "Laptop",
 "Bakòp",
-"Tablet",
+"Tablèt",
 "Printer POS",
 ];
 
@@ -204,7 +204,7 @@ child: Column(
 crossAxisAlignment: CrossAxisAlignment.start,
 children: [
 Text(
-"Kreye yon nouvo fich",
+"Kreye yon nouvo fich rechaj",
 style: TextStyle(
 color: Colors.white,
 fontSize: 19,
